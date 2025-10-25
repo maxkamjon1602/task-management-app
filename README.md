@@ -55,6 +55,7 @@ This project demonstrates **Laravel fundamentals**: routing, migrations, Eloquen
    ```bash
    php artisan key:generate
    php artisan migrate
+   php artisan db:seed --class=TaskSeeder
    ```
 
 6. **Run the development server**

@@ -13,11 +13,11 @@ Route::get('/tasks', function () {
   if (!$tasks) {
     abort(404);
   }
-  return view('tasks', ['tasks' => $tasks]);
+  return view('task.index', ['tasks' => $tasks]);
 });
 
 Route::get('/task-create', function () {
-  return view('task-create');
+  return view('task.create');
 });
 
 Route::post('/task-create', function (Request $request) {
@@ -39,7 +39,7 @@ Route::get('/task-edit/{id}', function ($id) {
   if (!$task) {
     abort(404);
   }
-  return view('task-edit', ['task' => $task]);
+  return view('task.update', ['task' => $task]);
 });
 
 Route::post('/task-edit/{id}', function (Request $request, $id) {

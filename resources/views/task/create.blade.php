@@ -1,5 +1,5 @@
 <x-layout>
-  <form method="POST" action="/task-create" class="max-w-md mt-4 space-y-4">
+  <form method="POST" action="/tasks/create" class="max-w-md mt-4 space-y-4">
     @csrf
 
     <div>

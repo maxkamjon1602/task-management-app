@@ -16,4 +16,14 @@ class Task extends Model
         'completed'    => 'boolean',
         'completed_at' => 'datetime',
     ];
+
+    public function user()
+    {
+      return $this->belongsTo(User::class);
+    }
+
+    public function collections()
+    {
+      return $this->belongsToMany(Collection::class, foreignPivotKey: 'task_collection');
+    }
 }

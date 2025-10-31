@@ -16,11 +16,13 @@ Route::get('/tasks', function () {
   return view('task.index', ['tasks' => $tasks]);
 });
 
-Route::get('/task-create', function () {
+// Create
+Route::get('/tasks/create', function () {
   return view('task.create');
 });
 
-Route::post('/task-create', function (Request $request) {
+// Create
+Route::post('/tasks/{id}', function (Request $request) {
   $validated = $request->validate([
     'title'       => 'required|string|max:255',
     'description' => 'nullable|string|max:10000',
@@ -34,7 +36,7 @@ Route::post('/task-create', function (Request $request) {
   return redirect('/tasks')->with('status', 'Task created.');
 });
 
-Route::get('/task-edit/{id}', function ($id) {
+Route::get('/tasks/{id}', function ($id) {
   $task = Task::find($id);
   if (!$task) {
     abort(404);
@@ -42,7 +44,7 @@ Route::get('/task-edit/{id}', function ($id) {
   return view('task.update', ['task' => $task]);
 });
 
-Route::post('/task-edit/{id}', function (Request $request, $id) {
+Route::patch('/tasks/{id}', function (Request $request, $id) {
   $task = Task::find($id);
   if (!$task) {
     abort(404);

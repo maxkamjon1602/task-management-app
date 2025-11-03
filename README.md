@@ -3,6 +3,9 @@
 A minimal **Laravel + SQLite** CRUD application for managing tasks.  
 This project demonstrates **Laravel fundamentals**: routing, migrations, Eloquent ORM, Blade templating, and validation.
 
+### API
+OpenAI OpenAPI added for docs page showcasing all existing routes for Task component.
+
 ---
 
 ## 🚀 Features
@@ -15,7 +18,7 @@ This project demonstrates **Laravel fundamentals**: routing, migrations, Eloquen
 ---
 
 ## ⚙️ Requirements
-- PHP >= 8.1  
+- PHP >= 8.2  
 - Composer  
 - Laravel 10+  
 - SQLite (no extra server required)
@@ -55,7 +58,7 @@ This project demonstrates **Laravel fundamentals**: routing, migrations, Eloquen
    ```bash
    php artisan key:generate
    php artisan migrate
-   php artisan db:seed --class=TaskSeeder
+   php artisan db:seed
    ```
 
 6. **Run the development server**

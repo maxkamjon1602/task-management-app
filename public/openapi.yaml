@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: "Task Management Basic API Docs"
+  # version: 0.1.0
+  description: Swagger/OpenAPI very basic implementation to showcase API presense in the project.
+
+paths:
+  /tasks:
+    get:
+      summary: List tasks (HTML)
+      responses:
+        '200':
+          description: Tasks page rendered
+          content:
+            text/html:
+              schema:
+                type: string
+    post:
+      summary: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - pending
+                  - in_progress
+                  - done
+              required:
+              - title
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - pending
+                  - in_progress
+                  - done
+              required:
+              - title
+      responses:
+        '302':
+          description: Redirect to /tasks after create
+        '200':
+          description: Created (if not redirecting)
+  /tasks/{id}:
+    get:
+      summary: Show task (HTML)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Task details page
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Not found
+    patch:
+      summary: Update task (partial)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: false
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - pending
+                  - in_progress
+                  - done
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - pending
+                  - in_progress
+                  - done
+      responses:
+        '302':
+          description: Redirect after update
+        '200':
+          description: Updated (if not redirecting)
+        '404':
+          description: Not found
+    delete:
+      summary: Delete task
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '302':
+          description: Redirect after deletion
+        '200':
+          description: Deleted (if not redirecting)
+        '404':
+          description: Not found
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - in_progress
+          - done
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time

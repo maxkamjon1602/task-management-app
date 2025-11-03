@@ -14,7 +14,8 @@ class CollectionSeeder extends Seeder
     public function run(): void
     {
         //
-        Collection::create([ 'name' => 'Laravel' ]);
-        Collection::create([ 'name' => 'Sql' ]);
+        Collection::create(['user_id' => 1 , 'name' => 'Laravel' ]);
+        Collection::create(['user_id' => 1 , 'name' => 'Sql' ]);
+        Collection::create(['user_id' => 2 , 'name' => 'Future plans' ]);
     }
 }

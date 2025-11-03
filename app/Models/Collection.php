@@ -12,6 +12,6 @@ class Collection extends Model
 
     public function tasks()
     {
-      return $this->belongsToMany(Task::class, relatedPivotKey: 'task_collection');
+      return $this->belongsToMany(Task::class, 'task_collection');
     }
 }

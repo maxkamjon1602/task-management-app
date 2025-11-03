@@ -15,25 +15,21 @@ class TaskSeeder extends Seeder
         //
         Task::create([
           'user_id'=> 1,
-          // 'collection_id' => 1,
           'title' => 'Note 4', 
           'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet officiis fugiat rem at delectus corporis quia. Illo eius soluta pariatur alias nostrum molestiae quo, adipisci consequatur sint earum impedit mollitia..'
         ]);
         Task::create([
           'user_id'=> 1,
-          // 'collection_id' => 2,
           'title' => 'Note 1', 
           'description' => 'Task management update using new OpenAI OpenAPI/Swagger.'
         ]);
         Task::create([
           'user_id' => 1,
-          // 'collection_id' => 2,
           'title' => 'Note 2', 
           'description' => 'Production-grade API docs written for a Laravel Project.'
         ]);
         Task::create([
           "user_id" => 2,
-          // "collection_id" => 2,
           'title' => 'Note 3', 
           'description' => 'The project showcases structure, annotations and repeatable workflow.'
         ]);

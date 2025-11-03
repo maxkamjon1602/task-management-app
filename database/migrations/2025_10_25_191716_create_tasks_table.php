@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            // $table->foreignIdFor(Collection::class)->nullable();
             $table->string('title');                 // required
             $table->text('description')->nullable(); // optional
             $table->boolean('completed')->default(false);

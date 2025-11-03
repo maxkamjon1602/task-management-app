@@ -8,85 +8,99 @@ Route::get('/', function () {
   return redirect('tasks');
 });
 
+
+// Swagger/OpenAPI
+Route::get('/docs', function () {
+  return view('docs');
+});
+
+// Index
 Route::get('/tasks', function () {
-  $tasks = Task::all();
+  $tasks = Task::with('user')->latest()->paginate(4);   //simplePaginate(), cursorPaginate()
+
   if (!$tasks) {
     abort(404);
   }
-  return view('task.index', ['tasks' => $tasks]);
+  return view('tasks.index', ['tasks' => $tasks]);
 });
 
 // Create
 Route::get('/tasks/create', function () {
-  return view('task.create');
+  return view('tasks.create');
 });
 
-// Create
-Route::post('/tasks/{id}', function (Request $request) {
-  $validated = $request->validate([
-    'title'       => 'required|string|max:255',
-    'description' => 'nullable|string|max:10000',
-  ]);
-
-  $task = Task::create([
-    'title'       => $validated['title'],
-    'description' => $validated['description'],
-  ]);
-
-  return redirect('/tasks')->with('status', 'Task created.');
-});
-
+// Show
 Route::get('/tasks/{id}', function ($id) {
   $task = Task::find($id);
   if (!$task) {
     abort(404);
   }
-  return view('task.update', ['task' => $task]);
+  return view('tasks.show', ['task' => $task]);
 });
 
-Route::patch('/tasks/{id}', function (Request $request, $id) {
+// Store
+Route::post('/tasks', function (Request $request) {
+  $validated = $request->validate([
+    'title'       => 'nullable|string|max:255',
+    'description' => 'required|string|max:10000',
+  ]);
+
+  $task = Task::create([
+    'user_id'     => 4,
+    'title'       => $validated['title'],
+    'description' => $validated['description'],
+  ]);
+
+  return redirect("/tasks");
+});
+
+// Edit
+Route::get('/tasks/{id}/edit', function ($id) {
   $task = Task::find($id);
   if (!$task) {
     abort(404);
   }
+  return view('tasks.edit', ['task' => $task]);
+});
 
-  $validated = $request->validate([
-    'title'       => 'required|string|max:255',
-    'description' => 'nullable|string|max:10000',
+// Update
+Route::patch('/tasks/{id}', function ($id) {
+  request()->validate([
+    'title'       => 'nullable|string|max:255',
+    'description' => 'required|string|max:10000',
     'completed'   => 'nullable|in:0,1',
   ]);
 
-  $completed = $request->boolean('completed');
+  $task = Task::findOrFail($id);
+  $completed = request()->boolean('completed');
 
   $task->update([
-    'title'        => $validated['title'],
-    'description'  => $validated['description'] ?? null,
+    'title'        => request('title'),
+    'description'  => request('description' ?? null),
     'completed'    => $completed,
     'completed_at' => $completed ? now() : null,
   ]);
 
-  return redirect('/tasks')->with('status', 'Task updated.');
+  return redirect('/tasks/' . $task->id);
 });
 
-Route::get('/task/{id}/delete', function ($id) {
-  $task = Task::find($id);
-  if (!$task) {
-    abort(404);
-  }
+// Destroy
+Route::delete('/tasks/{id}', function ($id) {
+  $task = Task::findOrFail($id);
   $task->delete();
 
   return redirect('/tasks')->with('status', 'Task deleted.');
 });
 
-Route::post('/task/{id}/toggle', function ($id) {
-  $task = Task::find($id);
-  if (!$task) {
-    abort(404);
-  }
+// Route::post('/task/{id}/toggle', function ($id) {
+//   $task = Task::find($id);
+//   if (!$task) {
+//     abort(404);
+//   }
 
-  $task->completed = ! $task->completed;
-  $task->completed_at = $task->completed ? now() : null;
-  $task->save();
+//   $task->completed = ! $task->completed;
+//   $task->completed_at = $task->completed ? now() : null;
+//   $task->save();
 
-  return redirect('/tasks')->with('status', 'Task status updated.');
-});
+//   return redirect('/tasks')->with('status', 'Task status updated.');
+// });

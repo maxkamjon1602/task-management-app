@@ -10,7 +10,8 @@ class Task extends Model
     /** @use HasFactory<\Database\Factories\TaskFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'completed', 'completed_at'];
+    protected $guarded = [];
+    // protected $fillable = ['title', 'description', 'completed', 'completed_at'];
 
     protected $casts = [
         'completed'    => 'boolean',
@@ -24,6 +25,8 @@ class Task extends Model
 
     public function collections()
     {
-      return $this->belongsToMany(Collection::class, foreignPivotKey: 'task_collection');
+        return $this->belongsToMany( Collection::class, 'task_collection' );
+            // ->withPivot('task_collection')
+            // ->withTimestamps();
     }
 }

@@ -27,7 +27,7 @@ paths:
                 title:
                   type: string
                 description:
-                  type: string
+                  type: string  
                 status:
                   type: string
                   enum:

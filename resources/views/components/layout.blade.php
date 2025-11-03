@@ -12,10 +12,10 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
 <nav class="relative bg-gray-800 p-2">
   <div class="max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+    <div class="flex flex-1 items-center sm:items-stretch sm:justify-start">
       <div class="flex space-x-4">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-        <a href="/tasks" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Tasks</a>
+        <a href="/" aria-current="page" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white">Home</a>
+        <a href="/tasks" aria-current="page" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-white/5 hover:text-white">Tasks</a>
         <a href="/tasks/create" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Create task</a>
         </div>
     </div>
@@ -24,7 +24,7 @@
 
 
 <header class="bg-white shadow">
-  <div class="mx-auto-max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
+  <div class="flex justify-between mx-auto-max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
     <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
     <x-button href="/tasks/create">Create Task</x-button>
   </div>

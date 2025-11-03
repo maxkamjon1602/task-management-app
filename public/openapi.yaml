@@ -1,22 +1,23 @@
 openapi: 3.0.3
 info:
-  title: "Task Management Basic API Docs"
-  # version: 0.1.0
-  description: Swagger/OpenAPI very basic implementation to showcase API presense in the project.
-
+  title: Task Management — API Docs
+  description: Swagger - OpenAPI docs for existing Task routes.
+servers:
+- url: http://localhost:8000
+  description: task-management-app
 paths:
   /tasks:
     get:
-      summary: List tasks (HTML)
+      summary: All tasks.
       responses:
         '200':
-          description: Tasks page rendered
+          description: Tasks page rendered.
           content:
             text/html:
               schema:
                 type: string
     post:
-      summary: Create a new task
+      summary: Create a new task.
       requestBody:
         required: true
         content:
@@ -27,7 +28,7 @@ paths:
                 title:
                   type: string
                 description:
-                  type: string  
+                  type: string
                 status:
                   type: string
                   enum:
@@ -54,12 +55,24 @@ paths:
               - title
       responses:
         '302':
-          description: Redirect to /tasks after create
+          description: Go back to /tasks after create.
         '200':
-          description: Created (if not redirecting)
+          description: Created (if not redirecting).
+  /tasks/create:
+    get:
+      summary: Show create form
+      description: >
+        Displays the HTML form used to create a new task.
+      responses:
+        '200':
+          description: Create page shown
+          content:
+            text/html:
+              schema:
+                type: string
   /tasks/{id}:
     get:
-      summary: Show task (HTML)
+      summary: Show task.
       parameters:
       - name: id
         in: path
@@ -68,15 +81,15 @@ paths:
           type: integer
       responses:
         '200':
-          description: Task details page
+          description: Task details page.
           content:
             text/html:
               schema:
                 type: string
         '404':
-          description: Not found
+          description: Not found.
     patch:
-      summary: Update task (partial)
+      summary: Update task.
       parameters:
       - name: id
         in: path
@@ -116,13 +129,13 @@ paths:
                   - done
       responses:
         '302':
-          description: Redirect after update
+          description: Go back after update.
         '200':
-          description: Updated (if not redirecting)
+          description: Updated (if not redirecting).
         '404':
-          description: Not found
+          description: Not found.
     delete:
-      summary: Delete task
+      summary: Delete task.
       parameters:
       - name: id
         in: path
@@ -131,12 +144,27 @@ paths:
           type: integer
       responses:
         '302':
-          description: Redirect after deletion
+          description: Go back after deletion.
         '200':
-          description: Deleted (if not redirecting)
+          description: Deleted (if not redirecting).
         '404':
-          description: Not found
-
+          description: Not found.
+  /task/{id}/toggle:
+    post:
+      summary: Toggle task status.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '302':
+          description: Go back after toggle.
+        '200':
+          description: Toggled (if not redirecting).
+        '404':
+          description: Not found.
 components:
   schemas:
     Task:

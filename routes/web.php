@@ -5,11 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home');
 
-
-// Swagger/OpenAPI
-Route::get('/docs', function () {
-  return view('docs');
-});
+// Swagger - OpenAPI
+Route::view('/docs','docs');
 
 // Tasks
 Route::get('/tasks', [TaskController::class, 'index']);
